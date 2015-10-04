@@ -1,7 +1,7 @@
 clc; clear;
 
 % load csv file
-allCoMDanalysis = load('datatanash.csv');
+allCoMDanalysis = load('data.csv');
 
 % Normalization of data
 % Calculate mean of each column
@@ -29,20 +29,17 @@ training_size = floor(size(features,1)*.70);
 training_features = features(1:training_size,:);
 training_ground = y_ground(1:training_size,:);
 
+% Test set (30 - test)
 test_size = size(features,1)-training_size;
 test_set = features(training_size:training_size+test_size,:);
 test_ground = y_ground(training_size:training_size+test_size,:);
+
 % Gradient Descent (Numerical Methods)
 learning_rate = 0.01;
 iterations = 100000;
 
-theta_gradient_temp=0;
 % Gradient Descent Iterations
 for m=1:iterations
-%     (h_x-training_ground)'
-%     size((h_x-training_ground)')
-%     training_features
-%     size(training_features)
     theta_gradient = theta_gradient-(learning_rate*(1/training_size)*...
            (((training_features*theta_gradient)-training_ground)'*...
            training_features)');
